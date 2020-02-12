@@ -1,0 +1,13 @@
+.weather {
+    width: 1000px;
+    height: 200px;
+    margin-left: 250px;
+    text-align: center;
+    font-weight: bold;
+    background-image: url("weather.png");
+    color: #000000;
+
+    .weather__titel {
+        padding-top: 30px;
+    }
+}
