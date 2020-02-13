@@ -6,27 +6,41 @@ function getLocation() {
     }
 }
 
-function fetchData(url) {
+function fetchData(url, current = false) {
     fetch(url)
         .then(function(response) {
             if(response.ok) {
                 response.json().then(function(data) {
-                    var weather = document.getElementsByClassName("weather__temp");
-                    var coord = document.getElementsByClassName("weather__coords");
-                    var location = document.getElementsByClassName("weather__location");
 
-                    var tempp = "<p class='design'> Temperture: " + data.main.temp + "°C" + "</p>";
-                    var coords = "<p class='design'> Naam van de stad: " + data.name + "</p>";
-                    var loc = "<p class='design'> Coordinaten: " + data.coord.lat + ", " + data.coord.lon + "</p>";
+                    var div = document.createElement("div");
+                    div.classList.add("cards");
 
-                    weather[0].innerHTML += tempp;
-                    coord[0].innerHTML += coords;
-                    location[0].innerHTML += loc;
+                    var tempp = "<p> Temperture: " + data.main.temp + "°C" + "</p>";
+                    var coords = "<p> Naam van de stad: " + data.name + "</p>";
+                    var loc = "<p> Coordinaten: " + data.coord.lat + ", " + data.coord.lon + "</p>";
+
+                    div.innerHTML += tempp;
+                    div.innerHTML += coords;
+                    div.innerHTML += loc;
+
+                    if(current) {
+
+                        weather[0].innerHTML += tempp;
+                        coord[0].innerHTML += coords;
+                        location[0].innerHTML += loc;
+
+                        return;
+                    }
+                    return render(div);
                 });
             } else {
                 console.log("response failed");
             }
         });
+}
+
+function render(element) {
+    return document.body.appendChild(element);
 }
 
 function showLocation(position) {
@@ -40,9 +54,14 @@ function showLocation(position) {
 
 function getInputValue() {
     document.querySelector(".button").addEventListener("click", function () {
-        var city = document.querySelector(".addCity").value;
-        const url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=e10a28dc8f6f5e57908fa1073297b8ec&units=metric";
+        var value = document.querySelector(".addCity").value;
+        document.querySelector(".weather").append(value);
+        const url = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=" + value + "&appid=e10a28dc8f6f5e57908fa1073297b8ec&units=metric";
         console.log(url);
+
+        // let myObject_Serialized = JSON.stringify(url);
+        // console.log(myObject_Serialized);
+
         fetchData(url);
     });
 }

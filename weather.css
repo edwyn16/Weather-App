@@ -1,14 +1,14 @@
-.weather {
-  width: 1000px;
-  height: 200px;
-  margin-left: 250px;
-  text-align: center;
-  font-weight: bold;
-  background-image: url("weather.png");
-  color: #000000;
+.form {
+  margin-bottom: 50px;
 }
 
-.weather .weather__titel {
-  padding-top: 30px;
+.cards {
+  margin-bottom: 50px;
+  margin-left: 50px;
+  text-align: center;
+  border: 1px solid #90ee90;
+  border-radius: 15px;
+  background-color: #90ee90;
+  width: 150px;
 }
 /*# sourceMappingURL=weather.css.map */
